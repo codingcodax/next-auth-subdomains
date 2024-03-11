@@ -1,4 +1,5 @@
 packages:
+  - apps/app
   - apps/www
   - packages/api
   - packages/auth
