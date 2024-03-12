@@ -22,6 +22,7 @@
     "@trpc/next": "^10.34.0",
     "@trpc/react-query": "^10.34.0",
     "@trpc/server": "^10.34.0",
+    "cors": "^2.8.5",
     "next": "^13.4.9",
     "next-auth": "^4.22.1",
     "react": "18.2.0",
@@ -32,6 +33,7 @@
   "devDependencies": {
     "@acme/eslint-config": "^0.2.0",
     "@acme/tailwind-config": "^0.1.0",
+    "@types/cors": "^2.8.17",
     "@types/node": "^18.16.5",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
