@@ -45,10 +45,6 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    redirect: async ({ url, baseUrl }: { url: string; baseUrl: string }) => {
-      if (new URL(url).hostname === hostName) return Promise.resolve(url);
-      return Promise.resolve(baseUrl);
-    },
   },
   cookies: {
     sessionToken: {
