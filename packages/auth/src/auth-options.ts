@@ -27,6 +27,10 @@ declare module "next-auth" {
   // }
 }
 
+const useSecureCookies = env.NEXTAUTH_URL.startsWith("https://");
+const cookiePrefix = useSecureCookies ? "__Secure-" : "";
+const hostName = new URL(env.NEXTAUTH_URL).hostname;
+
 /**
  * Options for NextAuth.js used to configure
  * adapters, providers, callbacks, etc.
@@ -40,6 +44,22 @@ export const authOptions: NextAuthOptions = {
         // session.user.role = user.role; <-- put other properties on the session here
       }
       return session;
+    },
+    redirect: async ({ url, baseUrl }: { url: string; baseUrl: string }) => {
+      if (new URL(url).hostname === hostName) return Promise.resolve(url);
+      return Promise.resolve(baseUrl);
+    },
+  },
+  cookies: {
+    sessionToken: {
+      name: `${cookiePrefix}next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: useSecureCookies,
+        domain: hostName == "localhost" ? hostName : "." + hostName,
+      },
     },
   },
   adapter: PrismaAdapter(prisma),
