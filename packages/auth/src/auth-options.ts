@@ -44,10 +44,13 @@ export const authOptions: NextAuthOptions = {
       }
       return session;
     },
-    // redirect: async ({ url, baseUrl }: { url: string; baseUrl: string }) => {
-    //   if (new URL(url).hostname === hostName) return Promise.resolve(url);
-    //   return Promise.resolve(baseUrl);
-    // },
+    redirect: ({ url, baseUrl }) => {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return url;
+    },
   },
   cookies: {
     sessionToken: {
