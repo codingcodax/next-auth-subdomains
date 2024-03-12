@@ -22,7 +22,7 @@ const Home: NextPage = () => {
       if (sess.user) setSession(sess);
     };
 
-    async () => await getSession();
+    void getSession();
   }, []);
 
   return (
