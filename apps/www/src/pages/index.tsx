@@ -8,9 +8,12 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const getSession = async () => {
-      const res = await fetch("http://localhost:3000/api/auth/session", {
-        credentials: "include",
-      });
+      const res = await fetch(
+        "https://auth-app.codingcodax.dev/api/auth/session",
+        {
+          credentials: "include",
+        },
+      );
       console.log("🚀 ~ res:", res);
       const sess = (await res.json()) as {
         user?: { name: string; email: string; image: string };
@@ -31,8 +34,8 @@ const Home: NextPage = () => {
             <p>{session.user.email}</p>
           </div>
           <a
-            href={`http://localhost:3000/api/auth/signout?callbackUrl=${encodeURIComponent(
-              "http://localhost:3001",
+            href={`https://auth-app.codingcodax.dev/api/auth/signout?callbackUrl=${encodeURIComponent(
+              "https://auth-www.codingcodax.dev",
             )}`}
           >
             Sign Out
@@ -40,8 +43,8 @@ const Home: NextPage = () => {
         </>
       ) : (
         <a
-          href={`http://localhost:3000/api/auth/signin?callbackUrl=${encodeURIComponent(
-            "http://localhost:3001",
+          href={`https://auth-app.codingcodax.dev/api/auth/signin?callbackUrl=${encodeURIComponent(
+            "https://auth-www.codingcodax.dev",
           )}`}
         >
           Sign In
