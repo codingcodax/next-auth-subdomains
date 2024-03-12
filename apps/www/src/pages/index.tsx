@@ -9,7 +9,7 @@ const Home: NextPage = () => {
   useEffect(() => {
     const getSession = async () => {
       const res = await fetch(
-        "https://auth-app.codingcodax.dev/api/auth/session",
+        "https://auth-app.codingcodax.dev/api/trpc/auth.getSession",
         {
           credentials: "include",
         },
