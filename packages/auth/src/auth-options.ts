@@ -29,8 +29,7 @@ declare module "next-auth" {
 
 const useSecureCookies = env.NEXTAUTH_URL.startsWith("https://");
 const cookiePrefix = useSecureCookies ? "__Secure-" : "";
-const hostName = new URL(process.env.NEXTAUTH_URL ?? "").hostname;
-console.log(hostName);
+const hostName = new URL(env.NEXTAUTH_URL ?? "").hostname;
 
 /**
  * Options for NextAuth.js used to configure
@@ -58,7 +57,8 @@ export const authOptions: NextAuthOptions = {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
-        secure: useSecureCookies,
+        secure: true,
+        domain: `.${hostName}`,
       },
     },
   },
